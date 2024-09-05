@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket 示例</title>
+  </head>
+  <body>
+    <h1>WebSocket 示例</h1>
+    <input type="text" id="messageInput" placeholder="输入消息" />
+    <button id="sendButton">发送</button>
+    <div id="messages"></div>
+
+    <script>
+      const ws = new WebSocket("ws://localhost:8080");
+
+      ws.onopen = () => {
+        console.log("连接已建立");
+      };
+
+      ws.onmessage = (event) => {
+        const messagesDiv = document.getElementById("messages");
+        messagesDiv.innerHTML += `<p>${event.data}</p>`;
+      };
+
+      document.getElementById("sendButton").onclick = () => {
+        const input = document.getElementById("messageInput");
+        const message = input.value;
+        ws.send(message);
+        input.value = ""; // 清空输入框
+      };
+    </script>
+  </body>
+</html>
