@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 // 连接到 MQTT 代理
-const client = mqtt.connect('mqtt://192.168.140.173:1883');
+const client = mqtt.connect('mqtt://localhost:1883');
 
 client.on('connect', () => {
     console.log('连接到 MQTT 代理');
